@@ -1,9 +1,12 @@
 package com.TicketAPI.TicketAPI.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
@@ -25,4 +28,10 @@ public class Ticket {
 
     @NotNull
     private String descricao;
+
+    @NotNull
+    private LocalDate dataAbertura;
+
+    @Nullable
+    private LocalDate dataFechamento;
 }

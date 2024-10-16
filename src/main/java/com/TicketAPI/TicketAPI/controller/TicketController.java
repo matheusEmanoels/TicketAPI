@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,9 @@ public class TicketController {
     @PostMapping
     public ResponseEntity<GenericResponse> createTicket(@RequestBody TicketDTO ticketDTO){
         Ticket ticketEntity = modelMapper.map(ticketDTO, Ticket.class);
+        if(ticketEntity.getDataAbertura() == null){
+            ticketEntity.setDataAbertura(LocalDate.now());
+        }
         ticketService.save(ticketEntity);
         GenericResponse genericResponse = new GenericResponse();
         genericResponse.setMessage("Ticket saved successfully");
